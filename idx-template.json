@@ -1,0 +1,17 @@
+{
+  "name": "Hello world",
+  "description": "A hello world app",
+  "params": [
+    {
+      "id": "language",
+      "name": "Programming Language",
+      "type": "enum",
+      "default": "ts",
+      "options": {
+        "js": "JavaScript",
+        "ts": "TypeScript"
+      },
+      "required": true
+    }
+  ]
+}
