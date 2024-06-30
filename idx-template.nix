@@ -3,15 +3,25 @@
 # parameter IDs, including default values (language=ts by default in this example).
 { pkgs, language ? "ts", ... }: {
   packages = [
-    pkgs.nodejs
+    pkgs.symfony-cli
   ];
 
   bootstrap = ''
-    # We use Nix string interpolation to pass the user's chosen programming
-    # language to our script.
-    npm init --yes my-boot-strap@latest "$out" -- --lang=${language}
-    
     # Copy .idx folder to the new workspace
-    cp -rf ${./.idx} "$out"
+    cp -rf ${./.} "$out"
+
+    # Set some permissions
+    chmod -R +w "$out"
+
+    # Remove the template files themselves and any connection to the template's
+    # Git repository
+    rm -rf "$out/.git" "$out/idx-template".{nix,json}
+
+    # Run symfony command to create a new project
+    symfony new --version=${version} \
+      ${if type == "api" then "--api"} \
+      ${if type == "webapp" then "--webapp"} \
+      ${if docker then "--docker"} \
+      --dir="$out"
   ''
 }

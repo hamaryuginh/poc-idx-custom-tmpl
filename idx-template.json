@@ -3,15 +3,35 @@
   "description": "A hello world app",
   "params": [
     {
-      "id": "language",
-      "name": "Programming Language",
+      "id": "version",
+      "name": "Symfony version",
       "type": "enum",
-      "default": "ts",
+      "default": "lts",
       "options": {
-        "js": "JavaScript",
-        "ts": "TypeScript"
+        "lts": "LTS",
+        "stable": "Stable",
+        "next": "Next",
+        "previous": "Previous"
       },
       "required": true
+    },
+    {
+      "id": "type",
+      "name": "Installation type",
+      "type": "enum",
+      "default": "api",
+      "options": {
+        "api": "API",
+        "webapp": "Webapp"
+      },
+      "required": true
+    },
+    {
+      "id": "docker",
+      "name": "Enable Docker support",
+      "type": "boolean",
+      "default": true,
+      "required": false
     }
   ]
 }
